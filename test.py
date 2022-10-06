@@ -1,3 +1,4 @@
+from unittest import makeSuite
 import cv2
 
 from functions.add_alpha_channel import add_alpha_channel_255
