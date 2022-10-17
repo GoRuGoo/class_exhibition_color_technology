@@ -13,6 +13,15 @@
 ```
 git clone https://github.com/GoRuGoo/class_exhibition_color_technology
 ```
+2. Change Directory
+```
+cd class_exhibition_color_technology
+```
+3. Install Module
+```
+pip install -r requirements.txt
+```
+
 
 ## Usage
 1. Change Directory
