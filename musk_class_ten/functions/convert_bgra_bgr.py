@@ -1,10 +1,9 @@
-import cv2
 import numpy as np
-
 
 
 def convert_bgra_to_bgr(image: np.ndarray, return_mask: bool) -> np.ndarray:
     """Convert RGBA image to RGB image.
+
     Args:
         image (_type_): RGBA image
         return_mask (_type_):アルファチャンネルの配列をreutrnするかどうか
