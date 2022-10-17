@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from functions.convert_bgra_bgr import convert_bgra_to_bgr
+from .convert_bgra_bgr import convert_bgra_to_bgr
 
 
 def convert_green_to_black(image_w_alpha: np.ndarray) -> np.ndarray:

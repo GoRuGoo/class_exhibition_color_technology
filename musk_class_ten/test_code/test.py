@@ -1,5 +1,4 @@
 import cv2
-
 from functions.add_alpha_channel import add_alpha_channel_255
 from functions.convert_green_to_black import convert_green_to_black
 

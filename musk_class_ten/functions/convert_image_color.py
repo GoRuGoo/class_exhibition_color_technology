@@ -3,7 +3,12 @@ import numpy as np
 
 
 def convert_image_color(
-    self, image: np.ndarray, hue: float, saturation: float, value: float, include_alpha_ch: bool
+    self,
+    image: np.ndarray,
+    hue: float,
+    saturation: float,
+    value: float,
+    include_alpha_ch: bool,
 ) -> np.ndarray:
     """アルファチャンネル付きのRGB=(0,0,255)の画像の色を、指定したHSV数値の色に変更する.
 
@@ -19,10 +24,16 @@ def convert_image_color(
     image_wo_alpha, mask = self.convert_bgra_to_bgr(image, True)
     image_hsv = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
 
-    image_hsv[:, :, 0] = np.where(image_hsv[:, :, 0] == 120, hue / 2, image_hsv[:, :, 0])
-    image_hsv[:, :, 1] = np.where(image_hsv[:, :, 1] == 255, saturation, image_hsv[:, :, 1])
+    image_hsv[:, :, 0] = np.where(
+        image_hsv[:, :, 0] == 120, hue / 2, image_hsv[:, :, 0]
+    )
+    image_hsv[:, :, 1] = np.where(
+        image_hsv[:, :, 1] == 255, saturation, image_hsv[:, :, 1]
+    )
     image_hsv[:, :, 2] = np.where(
-        image_hsv[:, :, 2] != 0, (value * (image_hsv[:, :, 2] / 255)), image_hsv[:, :, 2]
+        image_hsv[:, :, 2] != 0,
+        (value * (image_hsv[:, :, 2] / 255)),
+        image_hsv[:, :, 2],
     )
     # ↑グラデーションの比率を保ったまま、明度を変更する
 
