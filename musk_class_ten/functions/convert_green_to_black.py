@@ -39,4 +39,6 @@ def convert_green_to_black(image_w_alpha: np.ndarray) -> np.ndarray:
     hsv_image_wo_alpha[:, :, 2] = np.where(third_judge, 255, image_wo_alpha[:, :, 2])
 
     convert_bgr_image = cv2.cvtColor(hsv_image_wo_alpha, cv2.COLOR_HSV2BGR)
-    return convert_bgr_image
+    b_ch,g_ch,r_ch = cv2.split(convert_bgr_image[:,:,:3])
+    convert_bgr_image_w_alpha = np.dstack((b_ch,g_ch,r_ch,mask))
+    return convert_bgr_image_w_alpha
