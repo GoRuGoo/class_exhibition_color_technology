@@ -16,16 +16,10 @@ def convert_green_to_black(image_w_alpha: np.ndarray) -> np.ndarray:
     image_wo_alpha, mask = convert_bgra_to_bgr(image_w_alpha, True)
     hsv_image_wo_alpha = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
 
-    # first_judge = hsv_image_wo_alpha[:, :, 0] > 40
-    # first_judge = ((hsv_image_wo_alpha[:,:,0]>73)&(hsv_image_wo_alpha[:,:,0]<74))&((hsv_image_wo_alpha[:,:,1]>253)&(hsv_image_wo_alpha[:,:,1]<254))&((hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172))
-    # second_judge = (hsv_image_wo_alpha[:,:,1]>253)&(hsv_image_wo_alpha[:,:,1]<254)&(hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172)
-    # third_judge = (hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172)
     first_judge = (hsv_image_wo_alpha[:, :, 0] > 71.3) & (
         hsv_image_wo_alpha[:, :, 0] < 77.3
     )
-    second_judge = (hsv_image_wo_alpha[:, :, 0] == 0) & (
-        (hsv_image_wo_alpha[:, :, 1] > 230) & (hsv_image_wo_alpha[:, :, 1] < 255)
-    )
+
     third_judge = (
         (hsv_image_wo_alpha[:, :, 0] == 0)
         & (hsv_image_wo_alpha[:, :, 1] == 0)
@@ -33,12 +27,9 @@ def convert_green_to_black(image_w_alpha: np.ndarray) -> np.ndarray:
     )
 
     hsv_image_wo_alpha[:, :, 0] = np.where(first_judge, 0, hsv_image_wo_alpha[:, :, 0])
-    hsv_image_wo_alpha[:, :, 1] = np.where(
-        second_judge, 255, hsv_image_wo_alpha[:, :, 1]
-    )
     hsv_image_wo_alpha[:, :, 2] = np.where(third_judge, 255, image_wo_alpha[:, :, 2])
-
+    # できるだけ元画像からおかしくならないようにSの要素変更はなし
     convert_bgr_image = cv2.cvtColor(hsv_image_wo_alpha, cv2.COLOR_HSV2BGR)
-    b_ch,g_ch,r_ch = cv2.split(convert_bgr_image[:,:,:3])
-    convert_bgr_image_w_alpha = np.dstack((b_ch,g_ch,r_ch,mask))
+    b_ch, g_ch, r_ch = cv2.split(convert_bgr_image[:, :, :3])
+    convert_bgr_image_w_alpha = np.dstack((b_ch, g_ch, r_ch, mask))
     return convert_bgr_image_w_alpha
