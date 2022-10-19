@@ -13,9 +13,9 @@ def transparent_black_ground(image_w_alpha_black_background: np.ndarray) -> np.n
     b_ch, g_ch, r_ch, a_ch = cv2.split(image_w_alpha_black_background[:, :, :4])
 
     judge = (
-        (image_w_alpha_black_background[:, :, 0] < 7)
-        & (image_w_alpha_black_background[:, :, 1] < 7)
-        & (image_w_alpha_black_background[:, :, 2] < 7)
+        (image_w_alpha_black_background[:, :, 0] == 0)
+        & (image_w_alpha_black_background[:, :, 1] == 0)
+        & (image_w_alpha_black_background[:, :, 2] == 0)
     )
 
     image_w_alpha_black_background[:, :, 3] = np.where(
