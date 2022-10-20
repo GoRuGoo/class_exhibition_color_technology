@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from .binary_bgr_convert import binary_bgr_convert
+from .binary_to_bgr_convert import binary_to_bgr_convert
 
 
 def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
@@ -15,7 +15,8 @@ def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
     hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
     binary_image = cv2.inRange(hsv_img, (62, 100, 0), (79, 255, 255))
     binary_image = cv2.bitwise_not(binary_image)
-    binary_image = binary_bgr_convert(binary_image)
+    # 2値化する
+    binary_image = binary_to_bgr_convert(binary_image)
 
     transparent = (255, 255, 255)
     result_image = np.where(binary_image == transparent, image_wo_alpha, binary_image)
