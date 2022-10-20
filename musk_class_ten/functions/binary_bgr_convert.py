@@ -11,6 +11,5 @@ def binary_bgr_convert(bin_image: np.ndarray) -> np.ndarray:
     dst_binary = np.dstack((bin_image, first_binary, second_binary))
     dst_binary[:, :, 1] = np.where(dst_binary[:, :, 0] == 0, 0, 255)
     dst_binary[:, :, 2] = np.where(dst_binary[:, :, 0] == 0, 0, 255)
-    cv2.imwrite("binary.png", dst_binary)
     dst_binary_eight = dst_binary.astype(np.uint8)
     return dst_binary_eight

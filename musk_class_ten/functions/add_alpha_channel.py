@@ -2,18 +2,18 @@ import cv2
 import numpy as np
 
 
-def add_alpha_channel_255(image_path: str) -> np.ndarray:
+def add_alpha_channel_255(image: str) -> np.ndarray:
     """アルファチャンネルが無いpng画像に透過0%のアルファチャンネルを追加する.
 
     Args:
-        image_path (_type_): アルファチャンネルを追加したい画像のパス
+        image_path (_type_): アルファチャンネルを追加したい画像のnumpy配列
     Returns:
         _type_: 色変更した画像のnumpy配列
     """
-
-    image_wo_alpha = cv2.imread(image_path)
-    height, width = image_wo_alpha.shape[:2]
-    b_ch, g_ch, r_ch = cv2.split(image_wo_alpha[:, :, :3])
+    if len(image.shape) != 3:
+        raise ValueError("The number of dimensions of the image is different")
+    height, width = image.shape[:2]
+    b_ch, g_ch, r_ch = cv2.split(image[:, :, :3])
     alpha_ch = np.full((height, width), 255)
     dst = np.dstack((b_ch, g_ch, r_ch, alpha_ch))
     dst_eight = dst.astype(np.uint8)
