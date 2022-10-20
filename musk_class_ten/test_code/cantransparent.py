@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from functions.create_black_image_array import create_black_image_array
-from functions.fuse_binary_and_image import fuse_binary_and_image
+from functions.binary_bgr_convert import binary_bgr_convert
 
 # 画像を読み込む。
 fg_img = cv2.imread("/home/gorugo/musk_class_ten/girl.png")
@@ -16,7 +16,8 @@ hsv = cv2.cvtColor(fg_img, cv2.COLOR_BGR2HSV)
 
 binary_image = cv2.inRange(hsv, (62, 100, 0), (79, 255, 255))
 binary_image = cv2.bitwise_not(binary_image)
-fg_img,binary_image = fuse_binary_and_image(fg_img,binary_image)
+binary_image = binary_bgr_convert(binary_image)
+print(fg_img.shape,binary_image.shape)
 # print(dumy_binary.shape)
 # dst = np.dstack((binary_image,dumy_binary))
 # dumy_binary_second = np.zeros((height,width,1))
@@ -24,7 +25,7 @@ fg_img,binary_image = fuse_binary_and_image(fg_img,binary_image)
 # dst_second = np.dstack((dumy_binary_second,dumy_binary_third))
 # dst = np.dstack((dst,dst_second))
 # cv2.imwrite("dst.png",dst)
-transparent = (255)
+transparent = (255,255,255)
 result = np.where(binary_image==transparent,fg_img,binary_image)
 cv2.imwrite("result.png",result)
 
