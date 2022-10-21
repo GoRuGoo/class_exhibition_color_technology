@@ -27,6 +27,8 @@ def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
 
     cv2.imwrite("binary_rinkaku.png", output)
     cv2.fillPoly(output, countours, 255)
+    output[:, :, 1] = np.where(output[:, :, 0] == 0, 0, 255)
+    output[:, :, 2] = np.where(output[:, :, 0] == 0, 0, 255)
 
     cv2.imwrite("fill.png", output)
     transparent = (255, 255, 255)
