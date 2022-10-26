@@ -1,5 +1,4 @@
 # class_exhibition_color_technology 
-README may be incomplete as it is under development
 ## Overview
 2022年度情報工学科2年時クラス展の背景透過に関する技術
 ## Requirement

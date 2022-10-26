@@ -1,39 +1,44 @@
 import cv2
 import numpy as np
 
-from .binary_to_bgr_convert import binary_to_bgr_convert
+from .convert_bgra_bgr import convert_bgra_to_bgr
 
 
-def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
+def convert_green_to_black(image_w_alpha: np.ndarray) -> np.ndarray:
     """Convert green element to white element.
 
     Args:
-        image_w_alpha(_type_):背景が緑なアルファチャンネルを含まない画像
+        image_w_alpha(_type_):背景が緑なアルファチャンネルを含んだ画像
     Returns:
-        _type_:緑色の背景を黒色に置換した画像
+        _type_:緑色の背景を白色に置換した画像
     """
-    hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
-    # 2値化する
-    binary_image = cv2.inRange(hsv_img, (60, 76, 0), (90, 200, 255))
-    binary_image = cv2.bitwise_not(binary_image)
 
-    # 輪郭を取る
-    countours, hierarchy = cv2.findContours(
-        binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    image_wo_alpha, mask = convert_bgra_to_bgr(image_w_alpha, True)
+    hsv_image_wo_alpha = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
+
+    # first_judge = hsv_image_wo_alpha[:, :, 0] > 40
+    # first_judge = ((hsv_image_wo_alpha[:,:,0]>73)&(hsv_image_wo_alpha[:,:,0]<74))&((hsv_image_wo_alpha[:,:,1]>253)&(hsv_image_wo_alpha[:,:,1]<254))&((hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172))
+    # second_judge = (hsv_image_wo_alpha[:,:,1]>253)&(hsv_image_wo_alpha[:,:,1]<254)&(hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172)
+    # third_judge = (hsv_image_wo_alpha[:,:,2]>170)&(hsv_image_wo_alpha[:,:,2]<172)
+    first_judge = (hsv_image_wo_alpha[:, :, 0] > 71.3) & (
+        hsv_image_wo_alpha[:, :, 0] < 77.3
     )
-    binary_image = binary_to_bgr_convert(binary_image)
-    # バイナリ画像に輪郭を描画して塗りつぶす
-    after_fill_binary_image = cv2.drawContours(
-        binary_image, countours, -1, (255, 0, 0), 3
+    second_judge = (hsv_image_wo_alpha[:, :, 0] == 0) & (
+        (hsv_image_wo_alpha[:, :, 1] > 230) & (hsv_image_wo_alpha[:, :, 1] < 255)
     )
-    cv2.fillPoly(after_fill_binary_image, countours, 255)
-    after_fill_binary_image[:, :, 1] = np.where(
-        after_fill_binary_image[:, :, 0] == 0, 0, 255
-    )
-    after_fill_binary_image[:, :, 2] = np.where(
-        after_fill_binary_image[:, :, 0] == 0, 0, 255
+    third_judge = (
+        (hsv_image_wo_alpha[:, :, 0] == 0)
+        & (hsv_image_wo_alpha[:, :, 1] == 0)
+        & ((hsv_image_wo_alpha[:, :, 2] > 150) & (hsv_image_wo_alpha[:, :, 2] < 155))
     )
 
-    transparent = (255, 255, 255)
-    result_image = np.where(binary_image == transparent, image_wo_alpha, binary_image)
-    return result_image
+    hsv_image_wo_alpha[:, :, 0] = np.where(first_judge, 0, hsv_image_wo_alpha[:, :, 0])
+    hsv_image_wo_alpha[:, :, 1] = np.where(
+        second_judge, 255, hsv_image_wo_alpha[:, :, 1]
+    )
+    hsv_image_wo_alpha[:, :, 2] = np.where(third_judge, 255, image_wo_alpha[:, :, 2])
+
+    convert_bgr_image = cv2.cvtColor(hsv_image_wo_alpha, cv2.COLOR_HSV2BGR)
+    b_ch,g_ch,r_ch = cv2.split(convert_bgr_image[:,:,:3])
+    convert_bgr_image_w_alpha = np.dstack((b_ch,g_ch,r_ch,mask))
+    return convert_bgr_image_w_alpha
