@@ -9,7 +9,7 @@ from functions.add_alpha_channel import add_alpha_channel_255
 from functions.convert_green_to_black import convert_green_to_black
 from functions.transparent_black_ground import transparent_black_ground
 
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form,Request
 
 app = FastAPI()
 templates = Jinja2Templates(directory="../templates")
@@ -22,6 +22,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+async def mainpage(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.post("/test/")
