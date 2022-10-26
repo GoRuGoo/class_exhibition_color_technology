@@ -10,8 +10,7 @@ def main():
     after_convert = convert_green_to_black(image_wo_alpha)
     after_convert = add_alpha_channel_255(after_convert)
     transparent_image = transparent_black_ground(after_convert)
-    transparent_image = cv2.resize(transparent_image,(399,600))
-    cv2.imwrite("test.png", transparent_image)
+    transparent_image = cv2.resize(transparent_image, (399, 600))
 
 
 if __name__ == "__main__":

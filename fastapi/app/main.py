@@ -9,7 +9,7 @@ from functions.add_alpha_channel import add_alpha_channel_255
 from functions.convert_green_to_black import convert_green_to_black
 from functions.transparent_black_ground import transparent_black_ground
 
-from fastapi import FastAPI, Form,Request
+from fastapi import FastAPI, Form, Request
 
 app = FastAPI()
 templates = Jinja2Templates(directory="../templates")
@@ -37,7 +37,6 @@ async def test(img: str = Form(...)):
     after_convert_green_to_black = convert_green_to_black(after_convert_bin_to_image)
     after_convert_green_to_black = add_alpha_channel_255(after_convert_green_to_black)
     transparent_image = transparent_black_ground(after_convert_green_to_black)
-    cv2.imwrite("test.png", transparent_image)
     return_image = ndarray_to_base64(transparent_image)
     return return_image
 
