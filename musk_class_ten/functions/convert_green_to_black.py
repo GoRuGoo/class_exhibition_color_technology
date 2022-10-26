@@ -14,7 +14,8 @@ def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
     """
     hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
     # 2値化する
-    binary_image = cv2.inRange(hsv_img, (60, 76, 0), (90, 200, 255))
+
+    binary_image = cv2.inRange(hsv_img, (60, 76, 0), (90, 200, 255)
     binary_image = cv2.bitwise_not(binary_image)
 
     # 輪郭を取る
