@@ -37,6 +37,10 @@ var image_to_embed = "";
 function captureImg(img_base64) {
     const body = new FormData();
     body.append('img', img_base64);
+    body.append('min_hue',hue_min_range.value);
+    body.append('max_hue',hue_max_range.value);
+    body.append('min_sat',sat_min_range.value);
+    body.append('max_sat',sat_max_range.value);
     xhr.open('POST', 'http://localhost:8000/test/', true);
     let img = new Image();
     xhr.onload = () => {

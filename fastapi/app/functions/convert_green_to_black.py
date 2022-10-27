@@ -4,17 +4,23 @@ import numpy as np
 from .binary_to_bgr_convert import binary_to_bgr_convert
 
 
-def convert_green_to_black(image_wo_alpha: np.ndarray) -> np.ndarray:
+def convert_green_to_black(
+    image_wo_alpha: np.ndarray, min_hue: int, max_hue: int, min_sat: int, max_sat: int
+) -> np.ndarray:
     """Convert green element to white element.
 
     Args:
         image_w_alpha(_type_):背景が緑なアルファチャンネルを含まない画像
+        min_hue(_type_):最小値のHUE
+        max_hue(_type_):最大値のHUE
+        min_sat(_type_):最小値のSAT
+        max_sat(_type_):最大値のSAT
     Returns:
         _type_:緑色の背景を黒色に置換した画像
     """
     hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
     # 2値化する
-    binary_image = cv2.inRange(hsv_img, (60, 76, 0), (90, 200, 255))
+    binary_image = cv2.inRange(hsv_img, (min_hue, min_sat, 0), (max_hue, max_sat, 255))
     binary_image = cv2.bitwise_not(binary_image)
 
     # 輪郭を取る
