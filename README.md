@@ -7,9 +7,13 @@ README may be incomplete as it is under development
 - Ubuntu 20.04 
 ### Library
 - Python 3.10.1
+- OpenCV
+- FastAPI
 
 
 ## Installation
+
+
 1. Clone this repository
 ```
 git clone https://github.com/GoRuGoo/class_exhibition_color_technology
@@ -18,7 +22,12 @@ git clone https://github.com/GoRuGoo/class_exhibition_color_technology
 ```
 cd class_exhibition_color_technology
 ```
-3. Install Module
+3. Install pre-commit
+- Reference: <https://pre-commit.com/#installation>
+```
+pre-commit install
+```
+4. Install Module
 ```
 pip install -r requirements.txt
 ```
@@ -27,11 +36,15 @@ pip install -r requirements.txt
 ## Usage
 1. Change Directory
 ```
-cd class_exhibition_color_technology
+cd class_exhibition_color_technology/fastapi/app
 ```
 2. Run
 ```
-python -m class_exhibition_color_technology
+uvicorn main:app --reload
+```
+3. Access URL
+```
+localhost:8000
 ```
 
 ## Author
