@@ -1,0 +1,17 @@
+.hsv_input{
+  display: flex;
+  background: #fff;
+}
+
+.gazouyou{
+    display: flex;
+}
+.button {
+    display: inline-block;
+    border-style: solid;
+    color: black;
+    background-color: rgb(225, 224, 224);
+    border-width:1px;
+    border-color: darkgray;
+    text-decoration: none;
+  }

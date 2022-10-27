@@ -37,10 +37,13 @@ var image_to_embed = "";
 function captureImg(img_base64) {
     const body = new FormData();
     body.append('img', img_base64);
+    body.append('min_hue',hue_min_range.value);
+    body.append('max_hue',hue_max_range.value);
+    body.append('min_sat',sat_min_range.value);
+    body.append('max_sat',sat_max_range.value);
     xhr.open('POST', 'http://localhost:8000/test/', true);
     let img = new Image();
     xhr.onload = () => {
-        console.log(xhr.responseText);
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);
         //ダブルクォーテーションが邪魔なので前後削除
         $('.image').children('img').attr('src',image_to_embed);
@@ -55,3 +58,23 @@ function DownloadImage(){
     downloadbutton.download = nowtime.getHours()+"_"+nowtime.getMinutes()+"_"+nowtime.getSeconds();
 
 }
+
+let hue_min_range = document.querySelector(`input[type='range'][name='hue_min_range']`);
+let hue_max_range = document.querySelector(`input[type='range'][name='hue_max_range']`);
+let sat_min_range = document.querySelector(`input[type='range'][name='sat_min_range']`);
+let sat_max_range = document.querySelector(`input[type='range'][name='sat_max_range']`);
+hue_min_range.addEventListener(`input`, () => {
+	document.querySelector(`#hue_min_output`).innerHTML = `HUE_MIN:${hue_min_range.value}`;
+});
+
+hue_max_range.addEventListener(`input`, () => {
+	document.querySelector(`#hue_max_output`).innerHTML = `HUE_MAX:${hue_max_range.value}`;
+});
+
+sat_min_range.addEventListener(`input`, () => {
+	document.querySelector(`#sat_min_output`).innerHTML = `SAT_MIN:${sat_min_range.value}`;
+});
+
+sat_max_range.addEventListener(`input`, () => {
+	document.querySelector(`#sat_max_output`).innerHTML = `SAT_MAX:${sat_max_range.value}`;
+});
