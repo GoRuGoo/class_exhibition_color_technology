@@ -27,6 +27,8 @@ def convert_green_to_black(
         _type_:緑色の背景を黒色に置換した画像
     """
 
+    judge_debug = False
+
     if judge_mani_black:
         gray_scale_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2GRAY)
         ret, binary_image = cv2.threshold(
@@ -62,4 +64,13 @@ def convert_green_to_black(
     result_image = np.where(
         after_fill_binary_image == transparent, image_wo_alpha, after_fill_binary_image
     )
+
+    if judge_debug:
+        cv2.imwrite("normal.png", image_wo_alpha)
+        if judge_mani_black:
+            cv2.imwrite("gray_scale.png", gray_scale_img)
+        cv2.imwrite("binary.png", binary_image)
+        cv2.imwrite("fill_binary.png", after_fill_binary_image)
+        cv2.imwrite("result.png", result_image)
+
     return result_image
