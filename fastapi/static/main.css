@@ -10,8 +10,8 @@
 .button {
   display: inline-block;
   padding: 0.8em 3em;
-  background-color: #e3364a; /* 背景色 */
-  box-shadow: 0 5px 0 #ca1c30; /* 影の太さ・色 */
+  background-color: #18eb18; /* 背景色 */
+  box-shadow: 0 5px 0 #18eb18; /* 影の太さ・色 */
   border-radius: 60px;
   color: #fff;
   cursor: pointer;
@@ -23,7 +23,7 @@
 }
 
 .button-font-setting{
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .hue{
@@ -31,4 +31,12 @@
 }
 .sat{
   margin-left: 10px;
+}
+
+.titleclass{
+  background-color: #18eb18;
+  color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  font-weight: 900;
 }
