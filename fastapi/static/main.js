@@ -41,8 +41,9 @@ function captureImg(img_base64) {
     body.append('max_hue',hue_max_range.value);
     body.append('min_sat',sat_min_range.value);
     body.append('max_sat',sat_max_range.value);
+    body.append('judge_mani_black',judge_mani_black.value);
+    body.append('detect_min_bright',detect_bright.value);
     xhr.open('POST', 'http://localhost:8000/transparent/', true);
-    let img = new Image();
     xhr.onload = () => {
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);
         //ダブルクォーテーションが邪魔なので前後削除
@@ -63,6 +64,8 @@ let hue_min_range = document.querySelector(`input[type='range'][name='hue_min_ra
 let hue_max_range = document.querySelector(`input[type='range'][name='hue_max_range']`);
 let sat_min_range = document.querySelector(`input[type='range'][name='sat_min_range']`);
 let sat_max_range = document.querySelector(`input[type='range'][name='sat_max_range']`);
+let detect_bright = document.querySelector(`input[type='range'][name='bright']`);
+let judge_mani_black = document.querySelector(`input[type='checkbox'][name='judge_manipulation_black']`);
 hue_min_range.addEventListener(`input`, () => {
 	document.querySelector(`#hue_min_output`).innerHTML = `HUE_MIN:${hue_min_range.value}`;
 });
@@ -78,3 +81,7 @@ sat_min_range.addEventListener(`input`, () => {
 sat_max_range.addEventListener(`input`, () => {
 	document.querySelector(`#sat_max_output`).innerHTML = `SAT_MAX:${sat_max_range.value}`;
 });
+
+detect_bright.addEventListener(`input`,()=>{
+    document.querySelector(`#bright_output`).innerHTML = `MIN_BRGT:${detect_bright.value}`;
+})
