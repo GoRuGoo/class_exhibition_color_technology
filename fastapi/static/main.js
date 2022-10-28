@@ -41,7 +41,8 @@ function captureImg(img_base64) {
     body.append('max_hue',hue_max_range.value);
     body.append('min_sat',sat_min_range.value);
     body.append('max_sat',sat_max_range.value);
-    body.append('judge_mani_black',judge_mani_black.value);
+    body.append('judge_mani_black',JudgeCheckbox(judge_mani_black.checked));
+    //Formはboolを入力した場合文字列になってしまうので1と0に変換して送信する。
     body.append('detect_min_bright',detect_bright.value);
     xhr.open('POST', 'http://localhost:8000/transparent/', true);
     xhr.onload = () => {
@@ -58,6 +59,15 @@ function DownloadImage(){
     downloadbutton.href = image_to_embed;
     downloadbutton.download = nowtime.getHours()+"_"+nowtime.getMinutes()+"_"+nowtime.getSeconds();
 
+}
+function JudgeCheckbox(judge){
+    let return_value = 0;
+    if (judge){
+        return_value = 1;
+        return return_value;
+    }else{
+        return return_value;
+    }
 }
 
 let hue_min_range = document.querySelector(`input[type='range'][name='hue_min_range']`);
