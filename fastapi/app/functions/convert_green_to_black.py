@@ -21,6 +21,8 @@ def convert_green_to_black(
         max_hue(_type_):最大値のHUE
         min_sat(_type_):最小値のSAT
         max_sat(_type_):最大値のSAT
+        judge_min_bright(_type_):黒の服に対応するかどうか判定。bool出ないのはFormからintが送信されるから
+        detect_min_bright(_type_):検出する最小の明るさ
     Returns:
         _type_:緑色の背景を黒色に置換した画像
     """
