@@ -21,11 +21,13 @@ def convert_green_to_black(
         max_hue(_type_):最大値のHUE
         min_sat(_type_):最小値のSAT
         max_sat(_type_):最大値のSAT
-        judge_min_bright(_type_):黒の服に対応するかどうか判定。bool出ないのはFormからintが送信されるから
+        judge_min_bright(_type_):黒の服に対応するかどうか判定。boolでないのはFormからintが送信されるから
         detect_min_bright(_type_):検出する最小の明るさ
     Returns:
         _type_:緑色の背景を黒色に置換した画像
     """
+
+    judge_debug = False
 
     if judge_mani_black:
         gray_scale_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2GRAY)
@@ -33,7 +35,7 @@ def convert_green_to_black(
             gray_scale_img, detect_min_bright, 255, cv2.THRESH_BINARY
         )
         binary_image = cv2.bitwise_not(binary_image)
-
+        print(judge_mani_black)
     else:
         hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
         binary_image = cv2.inRange(
@@ -46,7 +48,6 @@ def convert_green_to_black(
         binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
     binary_image = binary_to_bgr_convert(binary_image)
-    cv2.imwrite("before_fill.png", binary_image)
     # バイナリ画像に輪郭を描画して塗りつぶす
     after_fill_binary_image = cv2.drawContours(
         binary_image, countours, -1, (255, 0, 0), 3
@@ -58,8 +59,18 @@ def convert_green_to_black(
     after_fill_binary_image[:, :, 2] = np.where(
         after_fill_binary_image[:, :, 0] == 0, 0, 255
     )
-    cv2.imwrite("after_fill.png", after_fill_binary_image)
 
     transparent = (255, 255, 255)
-    result_image = np.where(binary_image == transparent, image_wo_alpha, binary_image)
+    result_image = np.where(
+        after_fill_binary_image == transparent, image_wo_alpha, after_fill_binary_image
+    )
+
+    if judge_debug:
+        cv2.imwrite("normal.png", image_wo_alpha)
+        if judge_mani_black:
+            cv2.imwrite("gray_scale.png", gray_scale_img)
+        cv2.imwrite("binary.png", binary_image)
+        cv2.imwrite("fill_binary.png", after_fill_binary_image)
+        cv2.imwrite("result.png", result_image)
+
     return result_image
