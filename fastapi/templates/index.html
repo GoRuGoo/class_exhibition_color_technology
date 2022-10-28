@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="/node_modules/nouislider/dist/nouislider.js"></script>
     <link rel="stylesheet" href="../static/main.css">
     <title>GET_IMAGE</title>
 
@@ -17,16 +16,16 @@
             <img src="">
         </div>
     </div>
-    <a href="" onclick="DownloadImage()" id="downloadbutton" class="button">Download</a>
-    <a href="/"id="resethsvbutton" class="button">RESET_HSV</a>
+    <a href="" onclick="DownloadImage()" id="downloadbutton" class="button button-font-setting">Download</a>
+    <a href="/"id="resethsvbutton" class="button button-font-setting">RESET_HSV</a>
         <div class="hsv_input">
-            <div style="border:solid">
+            <div style="border:solid" class="hue">
                 <p><input type="range" name="hue_min_range" min="0" max="120"  value="60"></p>
                 <p id="hue_min_output">HUE_MIN:60</p>
                 <p><input type="range" name="hue_max_range" min="0" max="120"  value="90"></p>
                 <p id="hue_max_output">HUE_MAX:90</p>
             </div>
-            <div style="border: solid">
+            <div style="border: solid" class="sat">
                 <p><input type="range" name="sat_min_range" min="0" max="255"  value="76"></p>
                 <p id="sat_min_output">SAT_MIN:76</p>
                 <p><input type="range" name="sat_max_range" min="0" max="255"  value="200"></p>
