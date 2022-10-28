@@ -41,7 +41,7 @@ function captureImg(img_base64) {
     body.append('max_hue',hue_max_range.value);
     body.append('min_sat',sat_min_range.value);
     body.append('max_sat',sat_max_range.value);
-    xhr.open('POST', 'http://localhost:8000/test/', true);
+    xhr.open('POST', 'http://localhost:8000/transparent/', true);
     let img = new Image();
     xhr.onload = () => {
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);

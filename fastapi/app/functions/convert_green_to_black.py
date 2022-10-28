@@ -1,4 +1,3 @@
-from email.mime import image
 import cv2
 import numpy as np
 
@@ -6,7 +5,12 @@ from .binary_to_bgr_convert import binary_to_bgr_convert
 
 
 def convert_green_to_black(
-    image_wo_alpha: np.ndarray, min_hue: int, max_hue: int, min_sat: int, max_sat: int
+    image_wo_alpha: np.ndarray,
+    min_hue: int,
+    max_hue: int,
+    min_sat: int,
+    max_sat: int,
+    ove_measures: bool,
 ) -> np.ndarray:
     """Convert green element to white element.
 
@@ -19,23 +23,25 @@ def convert_green_to_black(
     Returns:
         _type_:緑色の背景を黒色に置換した画像
     """
-    cv2.imwrite("nomarl.png",image_wo_alpha)
-    hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
-    gray_scale_img = cv2.cvtColor(image_wo_alpha,cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("gray_image.png",gray_scale_img)
-    # 2値化する
-    # binary_image = cv2.inRange(hsv_img, (min_hue, min_sat, 0), (max_hue, max_sat, 255))
-    # binary_image = cv2.bitwise_not(binary_image)
-    ret, binary_image = cv2.threshold(gray_scale_img, 204, 255, cv2.THRESH_BINARY)
-    binary_image = cv2.bitwise_not(binary_image)
-    cv2.imwrite("nomal_binary_image.png",binary_image)
+
+    if ove_measures:
+        gray_scale_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2GRAY)
+        ret, binary_image = cv2.threshold(gray_scale_img, 204, 255, cv2.THRESH_BINARY)
+        binary_image = cv2.bitwise_not(binary_image)
+
+    else:
+        hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
+        binary_image = cv2.inRange(
+            hsv_img, (min_hue, min_sat, 0), (max_hue, max_sat, 255)
+        )
+        binary_image = cv2.bitwise_not(binary_image)
 
     # 輪郭を取る
     countours, hierarchy = cv2.findContours(
         binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
     binary_image = binary_to_bgr_convert(binary_image)
-    cv2.imwrite("before_fill.png",binary_image)
+    cv2.imwrite("before_fill.png", binary_image)
     # バイナリ画像に輪郭を描画して塗りつぶす
     after_fill_binary_image = cv2.drawContours(
         binary_image, countours, -1, (255, 0, 0), 3
@@ -47,7 +53,7 @@ def convert_green_to_black(
     after_fill_binary_image[:, :, 2] = np.where(
         after_fill_binary_image[:, :, 0] == 0, 0, 255
     )
-    cv2.imwrite("after_fill.png",after_fill_binary_image)
+    cv2.imwrite("after_fill.png", after_fill_binary_image)
 
     transparent = (255, 255, 255)
     result_image = np.where(binary_image == transparent, image_wo_alpha, binary_image)
