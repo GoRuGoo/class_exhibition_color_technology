@@ -1,17 +1,72 @@
 .hsv_input{
   display: flex;
-  background: #fff;
+  padding: 20px;
 }
 
 .gazouyou{
     display: flex;
 }
 .button {
-    display: inline-block;
-    border-style: solid;
-    color: black;
-    background-color: rgb(225, 224, 224);
-    border-width:1px;
-    border-color: darkgray;
-    text-decoration: none;
-  }
+  display: inline-block;
+  padding: 0.8em 3em;
+  background-color: #18eb18; /* 背景色 */
+  box-shadow: 0 5px 0 #18eb18; /* 影の太さ・色 */
+  border-radius: 60px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none; /* 文字の下線を消す */
+}
+.button:hover {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+.button-font-setting{
+  font-weight: 900;
+}
+
+.hue{
+  border:solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  border-color: #18eb18;
+  border-width: 8px;
+}
+.sat{
+  border: solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  border-color: #18eb18;
+  border-width: 8px;
+}
+
+.titleclass{
+  background-color: #18eb18;
+  color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  font-weight: 900;
+}
+
+.videocap{
+  border: solid;
+  border-color: #18eb18;
+  border-radius: 20px;
+  margin: 10px;
+  border-width: 8px;
+}
+
+
+.sat{
+  background-color: #18eb18;
+  color: #fff;
+  font-weight: 900;
+}
+
+.hue{
+  background-color: #18eb18;
+  color: #fff;
+  font-weight: 900;
+}

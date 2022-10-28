@@ -29,19 +29,27 @@ async def mainpage(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/test/")
+@app.post("/transparent/")
 async def test(
     img: str = Form(...),
     min_hue: int = Form(...),
     max_hue: int = Form(...),
     min_sat: int = Form(...),
     max_sat: int = Form(...),
+    judge_mani_black: int = Form(...),
+    detect_min_bright: int = Form(...),
 ):
     image_binary = base64.b64decode(img)
     png = np.frombuffer(image_binary, dtype=np.uint8)
     after_convert_bin_to_image = cv2.imdecode(png, cv2.IMREAD_COLOR)
     after_convert_green_to_black = convert_green_to_black(
-        after_convert_bin_to_image, min_hue, max_hue, min_sat, max_sat
+        after_convert_bin_to_image,
+        min_hue,
+        max_hue,
+        min_sat,
+        max_sat,
+        judge_mani_black,
+        detect_min_bright,
     )
     after_convert_green_to_black = add_alpha_channel_255(after_convert_green_to_black)
     transparent_image = transparent_black_ground(after_convert_green_to_black)
