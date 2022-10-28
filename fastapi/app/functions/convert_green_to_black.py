@@ -10,7 +10,7 @@ def convert_green_to_black(
     max_hue: int,
     min_sat: int,
     max_sat: int,
-    judge_mani_black: int,
+    judge_mani_black: int ,
     detect_min_bright: int,
 ) -> np.ndarray:
     """Convert green element to white element.
@@ -27,13 +27,13 @@ def convert_green_to_black(
         _type_:緑色の背景を黒色に置換した画像
     """
 
-    if judge_mani_black:
+    if 1!=judge_mani_black:
         gray_scale_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2GRAY)
         ret, binary_image = cv2.threshold(
             gray_scale_img, detect_min_bright, 255, cv2.THRESH_BINARY
         )
         binary_image = cv2.bitwise_not(binary_image)
-
+        print(judge_mani_black)
     else:
         hsv_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2HSV)
         binary_image = cv2.inRange(
@@ -59,7 +59,9 @@ def convert_green_to_black(
         after_fill_binary_image[:, :, 0] == 0, 0, 255
     )
     cv2.imwrite("after_fill.png", after_fill_binary_image)
+    cv2.imwrite("binary.png",binary_image)
+
 
     transparent = (255, 255, 255)
-    result_image = np.where(binary_image == transparent, image_wo_alpha, binary_image)
+    result_image = np.where(after_fill_binary_image == transparent, image_wo_alpha, after_fill_binary_image)
     return result_image
