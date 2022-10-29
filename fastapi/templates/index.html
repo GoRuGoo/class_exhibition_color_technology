@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <h2 class="titleclass">Press Space Key</h3>
+    <h2 class="titleclass">TRANSPARENT_IMAGE ~Please Press Space Key~</h3>
     <canvas id="canvas" class="canvas-wrapper"></canvas>
     <div class="gazouyou">
         <video id="video" width="640" height="480" autoplay class="videocap"></video>
@@ -16,8 +16,12 @@
             <img src="" class="videocap">
         </div>
     </div>
-    <a href="" onclick="DownloadImage()" id="downloadbutton" class="button button-font-setting">DOWNLOAD</a>
-    <a href="/"id="resethsvbutton" class="button button-font-setting">RESET_HSV</a>
+
+    <div class="download_and_checkbox">
+        <a href="" onclick="DownloadImage()" id="downloadbutton" class="button button-font-setting-download">DOWNLOAD</a>
+        <a href="/"id="resethsvbutton" class="button button-font-setting-reset">RESET_HSV</a>
+        <label class="judge_switch"><input type="checkbox" name="judge_manipulation_black" id="judge_manipulation_black">CORP_BLACK</label>
+    </div>
         <div class="hsv_input">
             <div  class="hue">
                 <p><input type="range" name="hue_min_range" min="0" max="120"  value="60"></p>
@@ -32,8 +36,8 @@
                 <p id="sat_max_output">SAT_MAX:200</p>
             </div>
             <div class="detect_bright">
-                <p><input type="checkbox" name="judge_manipulation_black" id="judge_manipulation_black"></p>
-                <p>CORR_BLACK</p>
+                <p><input type="range" name="bright" min="0" max="255" value="204"></p>
+                <p id="bright_output">MIN_BRGT:204</p>
                 <p><input type="range" name="bright" min="0" max="255" value="204"></p>
                 <p id="bright_output">MIN_BRGT:204</p>
             </div>
