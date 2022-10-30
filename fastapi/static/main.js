@@ -43,7 +43,8 @@ function captureImg(img_base64) {
     body.append('max_sat',sat_max_range.value);
     body.append('judge_mani_black',JudgeCheckbox(judge_mani_black.checked));
     //Formはboolを入力した場合文字列になってしまうので1と0に変換して送信する。
-    body.append('detect_min_bright',detect_bright.value);
+    body.append('detect_min_bright',min_bright.value);
+    body.append('detect_max_bright',max_bright.value);
     xhr.open('POST', 'http://localhost:8000/transparent/', true);
     xhr.onload = () => {
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);
@@ -74,7 +75,8 @@ let hue_min_range = document.querySelector(`input[type='range'][name='hue_min_ra
 let hue_max_range = document.querySelector(`input[type='range'][name='hue_max_range']`);
 let sat_min_range = document.querySelector(`input[type='range'][name='sat_min_range']`);
 let sat_max_range = document.querySelector(`input[type='range'][name='sat_max_range']`);
-let detect_bright = document.querySelector(`input[type='range'][name='bright']`);
+let min_bright = document.querySelector(`input[type='range'][name='min_bright']`);
+let max_bright = document.querySelector(`input[type='range'][name='max_bright']`);
 let judge_mani_black = document.querySelector(`input[type='checkbox'][name='judge_manipulation_black']`);
 hue_min_range.addEventListener(`input`, () => {
 	document.querySelector(`#hue_min_output`).innerHTML = `HUE_MIN:${hue_min_range.value}`;
@@ -92,6 +94,10 @@ sat_max_range.addEventListener(`input`, () => {
 	document.querySelector(`#sat_max_output`).innerHTML = `SAT_MAX:${sat_max_range.value}`;
 });
 
-detect_bright.addEventListener(`input`,()=>{
-    document.querySelector(`#bright_output`).innerHTML = `MIN_BRGT:${detect_bright.value}`;
+min_bright.addEventListener(`input`,()=>{
+    document.querySelector(`#bright_min_output`).innerHTML = `MIN_BRGT:${min_bright.value}`;
+})
+
+max_bright.addEventListener(`input`,()=>{
+    document.querySelector(`#bright_max_output`).innerHTML = `MAX_BRGT:${max_bright.value}`;
 })

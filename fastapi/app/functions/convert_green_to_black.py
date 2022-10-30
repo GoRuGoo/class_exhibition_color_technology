@@ -12,6 +12,7 @@ def convert_green_to_black(
     max_sat: int,
     judge_mani_black: int,
     detect_min_bright: int,
+    detect_max_bright: int,
 ) -> np.ndarray:
     """Convert green element to white element.
 
@@ -23,6 +24,7 @@ def convert_green_to_black(
         max_sat(_type_):最大値のSAT
         judge_min_bright(_type_):黒の服に対応するかどうか判定。boolでないのはFormからintが送信されるから
         detect_min_bright(_type_):検出する最小の明るさ
+        detect_max_bright(_type_):検出する最大の明るさ
     Returns:
         _type_:緑色の背景を黒色に置換した画像
     """
@@ -32,7 +34,7 @@ def convert_green_to_black(
     if judge_mani_black:
         gray_scale_img = cv2.cvtColor(image_wo_alpha, cv2.COLOR_BGR2GRAY)
         ret, binary_image = cv2.threshold(
-            gray_scale_img, detect_min_bright, 255, cv2.THRESH_BINARY
+            gray_scale_img, detect_min_bright, detect_max_bright, cv2.THRESH_BINARY
         )
         binary_image = cv2.bitwise_not(binary_image)
         print(judge_mani_black)

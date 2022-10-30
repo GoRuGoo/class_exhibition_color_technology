@@ -1,6 +1,7 @@
 .hsv_input{
   display: flex;
-  padding: 20px;
+  margin-top: 10px;
+  font-weight: 900;
 }
 
 .gazouyou{
@@ -15,31 +16,71 @@
   color: #fff;
   cursor: pointer;
   text-decoration: none; /* 文字の下線を消す */
+  font-weight: 900;
+}
+
+.judge_switch{
+  display: inline-block;
+  padding: 0.8em 2em;
+  background-color: #18eb18; /* 背景色 */
+  box-shadow: 0 5px 0 #18eb18; /* 影の太さ・色 */
+  color: #fff;
+  cursor: pointer;
+  border-radius: 60px;
+  text-decoration: none; /* 文字の下線を消す */
+  font-weight: 900;
+  margin-left: 15px;
 }
 .button:hover {
   box-shadow: none;
   transform: translateY(5px);
 }
 
-.button-font-setting{
+.button-font-setting-download{
+  font-weight: 900;
+  margin-left: 20px;
+}
+.button-font-setting-reset{
   font-weight: 900;
 }
+
 
 .hue{
   border:solid;
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
+  margin-left: 39px;
   border-color: #18eb18;
   border-width: 8px;
+  background-color: #18eb18;
+  color: #fff;
+  width: 200px;
 }
 .sat{
   border: solid;
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
+  margin-left: 45px;
   border-color: #18eb18;
   border-width: 8px;
+  background-color: #18eb18;
+  color: #fff;
+  width: 200px;
+}
+
+.detect_bright{
+  border: solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 55px;
+  border-color: #18eb18;
+  border-width: 8px;
+  background-color: #18eb18;
+  color: #fff;
+  width: 200px;
 }
 
 .titleclass{
@@ -56,17 +97,4 @@
   border-radius: 20px;
   margin: 10px;
   border-width: 8px;
-}
-
-
-.sat{
-  background-color: #18eb18;
-  color: #fff;
-  font-weight: 900;
-}
-
-.hue{
-  background-color: #18eb18;
-  color: #fff;
-  font-weight: 900;
 }
