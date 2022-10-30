@@ -2,22 +2,24 @@
 
 README may be incomplete as it is under development
 
+デプロイは考えてないのでローカルでの説明になります。(SSL証明書あたり)
+
 ## Overview
 
-2022年度情報工学科2年時クラス展の背景透過に関する技術
+2022年度情報工学科2年次クラス展の背景透過に関する技術
 
 ## Requirement
 
 ### OS
 
-- Ubuntu 20.04
+- Ubuntu 20.04(動作確認済)
 
 ### Library
 
 - Python 3.10.1
 - OpenCV
 - FastAPI
-
+- Uvicorn
 ## Installation
 
 1. Clone this repository
@@ -45,6 +47,26 @@ pre-commit install
 ```
 pip install -r requirements.txt
 ```
+5. Change Directory
+```
+cd fastapi/app
+```
+6. Install OpenSSL
+```
+sudo apt install openssl
+```
+6. Issuing private key
+```
+openssl genrsa 2048 > "keyname"
+```
+7. Issuing Certificate Signing Request
+```
+openssl req -new -key "keyname" > "csrname"
+```
+8. Issuing SSL certificate
+```
+openssl x509 -req -days 3650 -signkey "keyname" < "csrname" > "crtname"
+```
 
 ## Usage
 
@@ -57,13 +79,13 @@ cd class_exhibition_color_technology/fastapi/app
 2. Run
 
 ```
-uvicorn main:app --reload
+uvicorn main:app --port "portnumber" --host "hostname" --ssl-keyfile="private key path" --ssl-certfile="SSL certificate path"
 ```
 
 3. Access URL
 
 ```
-localhost:8000
+https://"hostname"
 ```
 
 ## Author
