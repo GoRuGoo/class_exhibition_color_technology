@@ -2,3 +2,6 @@
 __pycache__/
 venv/
 gorugo.png
+server.key
+server.csr
+server.crt
