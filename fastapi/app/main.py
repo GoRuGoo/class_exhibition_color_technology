@@ -2,6 +2,7 @@ import base64
 
 import cv2
 import numpy as np
+import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -12,8 +13,8 @@ from functions.transparent_black_ground import transparent_black_ground
 from fastapi import FastAPI, Form, Request
 
 app = FastAPI()
-templates = Jinja2Templates(directory="../templates")
-app.mount("/static", StaticFiles(directory="../static"), name="static")
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -69,3 +70,7 @@ def ndarray_to_base64(dst: np.ndarray) -> base64:
     result, dst_data = cv2.imencode(".png", dst)
     dst_base64 = base64.b64encode(dst_data)
     return dst_base64
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, reload=True, access_log=True)
