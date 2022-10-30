@@ -10,24 +10,24 @@
 .button {
   display: inline-block;
   padding: 0.8em 3em;
-  background-color: #18eb18; /* 背景色 */
-  box-shadow: 0 5px 0 #18eb18; /* 影の太さ・色 */
+  background-color: #1da1f2;
+  box-shadow: 0 5px 0 #1da1f2;
   border-radius: 60px;
   color: #fff;
   cursor: pointer;
-  text-decoration: none; /* 文字の下線を消す */
+  text-decoration: none;
   font-weight: 900;
 }
 
 .judge_switch{
   display: inline-block;
   padding: 0.8em 2em;
-  background-color: #18eb18; /* 背景色 */
-  box-shadow: 0 5px 0 #18eb18; /* 影の太さ・色 */
+  background-color: #1da1f2;
+  box-shadow: 0 5px 0 #1da1f2;
   color: #fff;
   cursor: pointer;
   border-radius: 60px;
-  text-decoration: none; /* 文字の下線を消す */
+  text-decoration: none;
   font-weight: 900;
   margin-left: 15px;
 }
@@ -51,9 +51,9 @@
   padding: 10px;
   margin: 10px;
   margin-left: 39px;
-  border-color: #18eb18;
+  border-color: #1da1f2;
   border-width: 8px;
-  background-color: #18eb18;
+  background-color: #1da1f2;
   color: #fff;
   width: 200px;
 }
@@ -63,9 +63,9 @@
   padding: 10px;
   margin: 10px;
   margin-left: 45px;
-  border-color: #18eb18;
+  border-color: #1da1f2;
   border-width: 8px;
-  background-color: #18eb18;
+  background-color: #1da1f2;
   color: #fff;
   width: 200px;
 }
@@ -76,15 +76,15 @@
   padding: 10px;
   margin: 10px;
   margin-left: 55px;
-  border-color: #18eb18;
+  border-color: #1da1f2;
   border-width: 8px;
-  background-color: #18eb18;
+  background-color: #1da1f2;
   color: #fff;
   width: 200px;
 }
 
 .titleclass{
-  background-color: #18eb18;
+  background-color: #1da1f2;
   color: #fff;
   padding: 20px;
   border-radius: 20px;
@@ -93,7 +93,7 @@
 
 .videocap{
   border: solid;
-  border-color: #18eb18;
+  border-color: #1da1f2;
   border-radius: 20px;
   margin: 10px;
   border-width: 8px;

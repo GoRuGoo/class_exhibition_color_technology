@@ -13,8 +13,8 @@ from functions.transparent_black_ground import transparent_black_ground
 from fastapi import FastAPI, Form, Request
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="../templates")
+app.mount("/static", StaticFiles(directory="../static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
