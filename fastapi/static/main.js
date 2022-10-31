@@ -1,6 +1,7 @@
 var video= document.getElementById('video');
 var media = navigator.mediaDevices.getUserMedia({video:true});
 
+
 media.then((stream)=>{
     video.srcObject = stream;
 });

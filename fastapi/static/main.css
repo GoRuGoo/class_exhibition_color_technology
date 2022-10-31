@@ -1,3 +1,11 @@
+.title_div{
+  margin-bottom: 100px;
+}
+.paramater{
+  margin-top: 100px;
+}
+
+
 .hsv_input{
   display: flex;
   margin-top: 10px;
@@ -6,24 +14,31 @@
 
 .gazouyou{
     display: flex;
-    padding-left: 0px;
 }
-#video{
+#video.videocap{
   transform: rotate(90deg);
+  margin: 90px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .videocap{
+  margin: 90px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.image{
   transform: rotate(90deg);
   margin-left: 0px;
+  margin-right: 0px;
 }
-
+.gazo{
+  padding-right: 0px;
+}
 .videocap{
   border: solid;
   border-color: #1da1f2;
   border-radius: 20px;
   border-width: 8px;
-  margin-top: 80px;
-  margin-bottom: 100px;
-  margin-left: 0px;
 }
 
 
