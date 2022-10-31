@@ -6,7 +6,27 @@
 
 .gazouyou{
     display: flex;
+    padding-left: 0px;
 }
+#video{
+  transform: rotate(90deg);
+}
+.videocap{
+  transform: rotate(90deg);
+  margin-left: 0px;
+}
+
+.videocap{
+  border: solid;
+  border-color: #1da1f2;
+  border-radius: 20px;
+  border-width: 8px;
+  margin-top: 80px;
+  margin-bottom: 100px;
+  margin-left: 0px;
+}
+
+
 .button {
   display: inline-block;
   padding: 0.8em 3em;
@@ -89,12 +109,4 @@
   padding: 20px;
   border-radius: 20px;
   font-weight: 900;
-}
-
-.videocap{
-  border: solid;
-  border-color: #1da1f2;
-  border-radius: 20px;
-  margin: 10px;
-  border-width: 8px;
 }
