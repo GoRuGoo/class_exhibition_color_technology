@@ -17,15 +17,8 @@
 }
 #video.videocap{
   transform: rotate(90deg);
-  margin: 90px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
-.videocap{
-  margin: 90px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
+
 .image{
   transform: rotate(90deg);
   margin-left: 0px;
