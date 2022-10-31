@@ -45,7 +45,8 @@ function captureImg(img_base64) {
     //Formはboolを入力した場合文字列になってしまうので1と0に変換して送信する。
     body.append('detect_min_bright',min_bright.value);
     body.append('detect_max_bright',max_bright.value);
-    if (location.hostname != '127.0.0.1'){
+    console.log(location.hostname)
+    if (location.hostname != 'localhost'){
         xhr.open('POST','https://'+ location.host + '/transparent/',true);
     }else{
         xhr.open('POST','http://' + location.host + '/transparent/',true);
