@@ -45,7 +45,7 @@ function captureImg(img_base64) {
     //Formはboolを入力した場合文字列になってしまうので1と0に変換して送信する。
     body.append('detect_min_bright',min_bright.value);
     body.append('detect_max_bright',max_bright.value);
-    xhr.open('POST', 'https://100.64.1.47:8000/transparent/', true);
+    xhr.open('POST', 'https://192.168.10.2:8000/transparent/', true);
     xhr.onload = () => {
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);
         //ダブルクォーテーションが邪魔なので前後削除
