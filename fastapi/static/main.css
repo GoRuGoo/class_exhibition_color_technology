@@ -27,6 +27,9 @@
 .gazo{
   padding-right: 0px;
 }
+.video_class{
+  width: 500px;
+}
 .videocap{
   border: solid;
   border-color: #1da1f2;
