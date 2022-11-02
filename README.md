@@ -3,6 +3,7 @@
 README may be incomplete as it is under development
 
 デプロイは考えてないのでローカルでの説明になります。(SSL証明書あたり)
+最近OpenSSLで脆弱性が見つかったそうなのでデプロイする場合は注意してください
 
 ## Overview
 
