@@ -46,11 +46,12 @@ function captureImg(img_base64) {
     //Formはboolを入力した場合文字列になってしまうので1と0に変換して送信する。
     body.append('detect_min_bright',min_bright.value);
     body.append('detect_max_bright',max_bright.value);
-    console.log(location.hostname)
-    if (location.hostname != 'localhost'){
-        xhr.open('POST','https://'+ location.host + '/transparent/',true);
-    }else{
+    if ((location.hostname == 'localhost') || (location.hostname == '127.0.0.1')){
         xhr.open('POST','http://' + location.host + '/transparent/',true);
+        console.log('=')
+    }else{
+        xhr.open('POST','https://'+ location.host + '/transparent/',true);
+        console.log('!=')
     }
     xhr.onload = () => {
         image_to_embed = "data:image/png;base64," + xhr.responseText.slice(1,-1);
