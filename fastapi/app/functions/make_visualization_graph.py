@@ -19,7 +19,10 @@ def make_visualization_graph(image: np.ndarray) -> np.ndarray:
     enc = np.frombuffer(buf.getvalue(), dtype=np.uint8)
     dst = cv2.imdecode(enc, 1)
     w, h = dst.shape[:2]
-    dst = cv2.resize(dst, dsize=(656, 496), fx=w / 656, fy=h / 496)
+    setting_w = 656
+    setting_h = 496
+    dst = cv2.resize(dst, dsize=(setting_w, setting_h), fx=w / 656, fy=h / 496)
+    dst = cv2.resize(dst, dsize=None, fx=0.9, fy=0.9)
 
     plt.cla()
 
