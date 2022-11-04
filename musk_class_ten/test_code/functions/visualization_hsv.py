@@ -21,6 +21,10 @@ def show_img(path):
     plt.savefig(buf, format="png")
     enc = np.frombuffer(buf.getvalue(), dtype=np.uint8)
     dst = cv2.imdecode(enc, 1)
+    w, h = dst.shape[:2]
+    dst = cv2.resize(dst, dsize=(656, 496), fx=w / 656, fy=h / 496)
+    print(dst.shape)
+    # dst = cv2.resize(dst,dsize=(496,656),fx=496/w,fy=656/h)
     cv2.imwrite("test.png", dst)
 
     return hist_h, hist_s, hist_v
