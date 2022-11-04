@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-def add_alpha_channel_255(image: str) -> np.ndarray:
+def add_alpha_channel_255(image: np.ndarray) -> np.ndarray:
     """アルファチャンネルが無いpng画像に透過0%のアルファチャンネルを追加する.
 
     Args:

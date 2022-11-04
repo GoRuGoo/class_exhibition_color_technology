@@ -108,3 +108,15 @@ min_bright.addEventListener(`input`,()=>{
 max_bright.addEventListener(`input`,()=>{
     document.querySelector(`#bright_max_output`).innerHTML = `MAX_BRGT:${max_bright.value}`;
 })
+
+
+function SetCorpWhite(){
+    hue_min_range.value = 50;
+    document.querySelector(`#hue_min_output`).innerHTML = `HUE_MIN:${hue_min_range.value}`;
+    hue_max_range.value = 100;
+	document.querySelector(`#hue_max_output`).innerHTML = `HUE_MAX:${hue_max_range.value}`;
+    sat_min_range.value = 130;
+	document.querySelector(`#sat_min_output`).innerHTML = `SAT_MIN:${sat_min_range.value}`;
+    sat_max_range.value = 255;
+	document.querySelector(`#sat_max_output`).innerHTML = `SAT_MAX:${sat_max_range.value}`;
+}
