@@ -60,8 +60,10 @@ function captureImg(img_base64) {
         image_graph = "data:image/png;base64," + jsonObj['graph']
         // image_graph = "data:image/png;base64," + xhr.responseText["graph"].slice(1,-1);
         //ダブルクォーテーションが邪魔なので前後削除
-        $('.image').children('img').attr('src',image_to_embed);
-        $('.graphimage').children('img').attr('src',image_graph);
+        // $('.image').children('img').attr('src',image_to_embed);
+        // $('.graphimage').children('img').attr('src',image_graph);
+        $('.image').attr('src',image_to_embed);
+        $('.graphimage').attr('src',image_graph);
     };
     xhr.send(body);
 }

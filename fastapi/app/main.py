@@ -46,7 +46,6 @@ async def test(
     png = np.frombuffer(image_binary, dtype=np.uint8)
     after_convert_bin_to_image = cv2.imdecode(png, cv2.IMREAD_COLOR)
     graph_image = make_visualization_graph(after_convert_bin_to_image)
-    cv2.imwrite("graph.png", graph_image)
     after_convert_green_to_black = convert_green_to_black(
         after_convert_bin_to_image,
         min_hue,

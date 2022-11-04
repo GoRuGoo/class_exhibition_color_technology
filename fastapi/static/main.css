@@ -1,10 +1,6 @@
 .title_div{
   margin-bottom: 100px;
 }
-.paramater{
-  margin-top: 100px;
-}
-
 
 .hsv_input{
   display: flex;
@@ -17,18 +13,20 @@
 }
 #video.videocap{
   transform: rotate(90deg);
+  margin-bottom: 20px;
 }
 
 .image{
   transform: rotate(90deg);
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 40px;
+  margin-bottom: 200px;
 }
 .gazo{
   padding-right: 0px;
 }
 .video_class{
   width: 500px;
+  display: flex;
 }
 .videocap{
   border: solid;
@@ -37,7 +35,15 @@
   border-width: 8px;
 }
 
+.graphimage{
+  float: left;
+  margin-bottom: 180px;
+}
 
+.image{
+  height: auto;
+  width: auto;
+}
 .button {
   display: inline-block;
   padding: 0.8em 3em;
