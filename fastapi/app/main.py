@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from functions.add_alpha_channel import add_alpha_channel_255
 from functions.convert_green_to_black import convert_green_to_black
+from functions.make_visualization_graph import make_visualization_graph
 from functions.transparent_black_ground import transparent_black_ground
 
 from fastapi import FastAPI, Form, Request
@@ -44,6 +45,7 @@ async def test(
     image_binary = base64.b64decode(img)
     png = np.frombuffer(image_binary, dtype=np.uint8)
     after_convert_bin_to_image = cv2.imdecode(png, cv2.IMREAD_COLOR)
+    graph_image = make_visualization_graph(after_convert_bin_to_image)
     after_convert_green_to_black = convert_green_to_black(
         after_convert_bin_to_image,
         min_hue,
@@ -57,7 +59,8 @@ async def test(
     after_convert_green_to_black = add_alpha_channel_255(after_convert_green_to_black)
     transparent_image = transparent_black_ground(after_convert_green_to_black)
     return_image = ndarray_to_base64(transparent_image)
-    return return_image
+    return_graph_image = ndarray_to_base64(graph_image)
+    return {"image": return_image, "graph": return_graph_image}
 
 
 def ndarray_to_base64(dst: np.ndarray) -> base64:

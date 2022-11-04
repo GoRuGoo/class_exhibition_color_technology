@@ -1,5 +1,8 @@
+import io
+
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def show_img(path):
@@ -13,10 +16,18 @@ def show_img(path):
     plt.plot(hist_s, color="g", label="s")
     plt.plot(hist_v, color="b", label="v")
     plt.legend()
-    plt.show()
+    # plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    enc = np.frombuffer(buf.getvalue(), dtype=np.uint8)
+    dst = cv2.imdecode(enc, 1)
+    w, h = dst.shape[:2]
+    dst = cv2.resize(dst, dsize=(656, 496), fx=w / 656, fy=h / 496)
+    print(dst.shape)
+    # dst = cv2.resize(dst,dsize=(496,656),fx=496/w,fy=656/h)
+    cv2.imwrite("test.png", dst)
 
     return hist_h, hist_s, hist_v
 
 
 h, s, v = show_img("komura.png")
-#
