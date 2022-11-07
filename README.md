@@ -81,7 +81,7 @@ cd class_exhibition_color_technology/fastapi/app
 2. Run
 
 ```
-uvicorn main:app --port "portnumber" --host "hostname" --ssl-keyfile="private key path" --ssl-certfile="SSL certificate path"
+python run.py
 ```
 
 3. Access URL
