@@ -87,7 +87,7 @@ python run.py
 3. Access URL
 
 ```
-https://"hostname"
+https://"host":8000
 ```
 
 ## Author
