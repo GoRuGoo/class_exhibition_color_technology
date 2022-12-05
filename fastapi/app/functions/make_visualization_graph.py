@@ -6,6 +6,7 @@ import numpy as np
 
 
 def make_visualization_graph(image: np.ndarray) -> np.ndarray:
+    image = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
     h, s, v = image[:, :, 0], image[:, :, 1], image[:, :, 2]
     hist_h = cv2.calcHist([h], [0], None, [256], [0, 256])
     hist_s = cv2.calcHist([s], [0], None, [256], [0, 256])
