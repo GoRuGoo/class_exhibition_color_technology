@@ -49,22 +49,22 @@ def convert_green_to_black(
     countours, hierarchy = cv2.findContours(
         binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
-    binary_image = binary_to_bgr_convert(binary_image)
+    after_convert_binary_image = binary_to_bgr_convert(binary_image)
     # バイナリ画像に輪郭を描画して塗りつぶす
-    after_fill_binary_image = cv2.drawContours(
-        binary_image, countours, -1, (255, 0, 0), 3
+    after_fill_image = cv2.drawContours(
+        after_convert_binary_image, countours, -1, (255, 0, 0), 3
     )
-    cv2.fillPoly(after_fill_binary_image, countours, 255)
-    after_fill_binary_image[:, :, 1] = np.where(
-        after_fill_binary_image[:, :, 0] == 0, 0, 255
+    cv2.fillPoly(after_fill_image, countours, 255)
+    after_fill_image[:, :, 1] = np.where(
+        after_fill_image[:, :, 0] == 0, 0, 255
     )
-    after_fill_binary_image[:, :, 2] = np.where(
-        after_fill_binary_image[:, :, 0] == 0, 0, 255
+    after_fill_image[:, :, 2] = np.where(
+        after_fill_image[:, :, 0] == 0, 0, 255
     )
 
     transparent = (255, 255, 255)
     result_image = np.where(
-        after_fill_binary_image == transparent, image_wo_alpha, after_fill_binary_image
+        after_fill_image == transparent, image_wo_alpha, after_fill_image
     )
 
     if judge_debug:
@@ -72,7 +72,7 @@ def convert_green_to_black(
         if judge_mani_black:
             cv2.imwrite("gray_scale.png", gray_scale_img)
         cv2.imwrite("binary.png", binary_image)
-        cv2.imwrite("fill_binary.png", after_fill_binary_image)
+        cv2.imwrite("fill_binary.png", after_fill_image)
         cv2.imwrite("result.png", result_image)
 
     return result_image
